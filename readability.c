@@ -8,7 +8,11 @@ int main(void)
     char text[1000];
 
     printf("Text: ");
-    fgets(text, sizeof(text), stdin);
+    if (fgets(text, sizeof(text), stdin) == NULL)
+    {
+        printf("Error reading input.\n");
+        return 1;
+    }
 
     int letters = 0;
     int words = 1;
@@ -26,8 +30,8 @@ int main(void)
             sentences++;
     }
 
-    double L = (double) letters / words * 100;
-    double S = (double) sentences / words * 100;
+    double L = (double)letters / words * 100;
+    double S = (double)sentences / words * 100;
 
     double index = 0.0588 * L - 0.296 * S - 15.8;
     int grade = (int) round(index);
